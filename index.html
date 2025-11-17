@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Electronics Store</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(90deg, red, black);
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-ser;
+}
+
+.navbar {
+  background: black;
+  padding: 15px;
+  text-align: center;
+}
+
+.navbar a {
+  color: white;
+  margin: 15px;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.page {
+  display: none;
+  padding: 20px;
+}
+
+.active {
+  display: block;
+}
+
+.product-box {
+  background: #f8f8;
+  padding: 15px;
+  margin: 15px 0;
+  border-radius: 10px;
+  box-shadow: 0 0 5px gray;
+}
+
+.product-box img {
+  width: 200px;
+  border-radius: 10px;
+}
+
+.form-box {
+  background: #f8f8;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px gray;
+  width: 90%;
+  margin: auto;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  font-size: 18px;
+}
+</style>
+
+<script>
+// PAGE SWITCHING
+function showPage(page) {
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  document.getElementById(page).classList.add("active");
+}
+
+// SEARCH FUNCTION
+function searchProducts() {
+  let text = document.getElementById("searchBox").value.toLowerCase();
+  let items = document.querySelectorAll(".product-box");
+
+  items.forEach(item => {
+    let content = item.innerText.toLowerCase();
+    item.style.display = content.includes(text) ? "block" : "none";
+  });
+}
+</script>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <a href="#" onclick="showPage('home')">Home</a>
+  <a href="#" onclick="showPage('appointment')">Appointment</a>
+  <a href="#" onclick="showPage('search')">Search</a>
+  <a href="#" onclick="showPage('technical')">Technical Issues</a>
+</div>
+
+<!-- HOME PAGE -->
+<div class="page active" id="home">
+  <h1>Welcome to This App</h1>
+  <h2>All Products Listed Below</h2>
+
+  <!-- TELEVISIONS -->
+  <h1>Televisions</h1>
+
+  <div class="product-box">
+    <h2>Samsung TV</h2>
+    <p><b>Price:</b> ₹35,000</p>
+    <p><b>Colors:</b> Black, Grey</p>
+    <img src="images/Samsung TV.webg" alt="">
+  </div>
+
+  <div class="product-box">
+    <h2>Sony TV</h2>
+    <p><b>Price:</b> ₹42,000</p>
+    <p><b>Colors:</b> Black, Silver</p>
+    <img src="images/Sony TV.webg" alt="">
+  </div>
+
+  <div class="product-box">
+    <h2>LG TV</h2>
+    <p><b>Price:</b> ₹30,500</p>
+    <p><b>Colors:</b> Black</p>
+    <img src="images/LG TV.webg" alt="">
+  </div>
+
+  <!-- WATCHES -->
+  <h1>Watches</h1>
+
+  <div class="product-box">
+    <h2>Boat Watch</h2>
+    <p><b>Price:</b> ₹2,999</p>
+    <p><b>Colors:</b> Blue, Black, Rose Gold</p>
+    <img src="images/Boat Watch.webg" alt="">
+  </div>
+
+  <div class="product-box">
+    <h2>Fire-Boltt Watch</h2>
+    <p><b>Price:</b> ₹1,799</p>
+    <p><b>Colors:</b> Black, Silver</p>
+    <img src="images/Firebolt Watch.webg" alt="">
+  </div>
+
+  <div class="product-box">
+    <h2>FastTrack Watch</h2>
+    <p><b>Price:</b> ₹3,500</p>
+    <p><b>Colors:</b> Black, Grey</p>
+    <img src="images/Fastrack Watch.webg" alt="">
+  </div>
+
+  <!-- PHONES -->
+  <h1>Phones</h1>
+
+  <div class="product-box">
+    <h2>Samsung Phone</h2>
+    <p><b>Price:</b> ₹22,000</p>
+    <p><b>Colors:</b> Black, Blue, White</p>
+    <img src="https://via.placeholder.com/200x120?text=Samsung+Phone" alt="">
+  </div>
+
+  <div class="product-box">
+    <h2>Apple iPhone</h2>
+    <p><b>Price:</b> ₹70,000</p>
+    <p><b>Colors:</b> Black, Silver, Pink</p>
+    <img src="https://via.placeholder.com/200x120?text=iPhone" alt="">
+  </div>
+
+  <div class="product-box">
+    <h2>Oppo Phone</h2>
+    <p><b>Price:</b> ₹18,000</p>
+    <p><b>Colors:</b> Blue, Green</p>
+    <img src="https://via.placeholder.com/200x120?text=Oppo+Phone" alt="">
+  </div>
+
+  <!-- FRIDGES -->
+  <h1>Fridges</h1>
+
+  <div class="product-box">
+    <h2>LG Fridge</h2>
+    <p><b>Price:</b> ₹28,000</p>
+    <p><b>Colors:</b> Silver, Black</p>
+    <img src="https://via.placeholder.com/200x120?text=LG+Fridge" alt="">
+  </div>
+
+  <div class="product-box">
+    <h2>Samsung Fridge</h2>
+    <p><b>Price:</b> ₹30,500</p>
+    <p><b>Colors:</b> Black, Blue</p>
+    <img src="https://via.placeholder.com/200x120?text=Samsung+Fridge" alt="">
+  </div>
+
+  <div class="product-box">
+    <h2>Haier Fridge</h2>
+    <p><b>Price:</b> ₹24,500</p>
+    <p><b>Colors:</b> Silver</p>
+    <img src="https://via.placeholder.com/200x120?text=Haier+Fridge" alt="">
+  </div>
+
+  <!-- WASHING MACHINES -->
+  <h1>Washing Machines</h1>
+
+  <div class="product-box">
+    <h2>Whirlpool WM</h2>
+    <p><b>Price:</b> ₹19,999</p>
+    <p><b>Colors:</b> Grey, White</p>
+    <img src="https://via.placeholder.com/200x120?text=Whirlpool+WM" alt="">
+  </div>
+
+  <div class="product-box">
+    <h2>LG Washing Machine</h2>
+    <p><b>Price:</b> ₹21,500</p>
+    <p><b>Colors:</b> Silver, Grey</p>
+    <img src="https://via.placeholder.com/200x120?text=LG+WM" alt="">
+  </div>
+
+  <div class="product-box">
+    <h2>IFB Washing Machine</h2>
+    <p><b>Price:</b> ₹23,000</p>
+    <p><b>Colors:</b> White</p>
+    <img src="https://via.placeholder.com/200x120?text=IFB+WM" alt="">
+  </div>
+
+  <!-- AIR CONDITIONERS -->
+  <h1>Air Conditioners</h1>
+
+  <div class="product-box">
+    <h2>Samsung AC</h2>
+    <p><b>Price:</b> ₹33,000</p>
+    <p><b>Colors:</b> White</p>
+    <img src="https://via.placeholder.com/200x120?text=Samsung+AC" alt="">
+  </div>
+
+  <div class="product-box">
+    <h2>LG AC</h2>
+    <p><b>Price:</b> ₹31,500</p>
+    <p><b>Colors:</b> White, Silver</p>
+    <img src="https://via.placeholder.com/200x120?text=LG+AC" alt="">
+  </div>
+
+  <div class="product-box">
+    <h2>Panasonic AC</h2>
+    <p><b>Price:</b> ₹29,000</p>
+    <p><b>Colors:</b> White</p>
+    <img src="https://via.placeholder.com/200x120?text=Panasonic+AC" alt="">
+  </div>
+
+</div>
+
+<!-- APPOINTMENT PAGE -->
+<div class="page" id="appointment">
+  <h1>Appointment Form</h1>
+
+  <div class="form-box">
+    <input type="text" placeholder="Your Name">
+    <input type="date" placeholder="Date of Birth">
+    <input type="tel" placeholder="Phone Number">
+    <input type="tel" placeholder="Secondary Phone Number">
+    <input type="email" placeholder="Email ID">
+    <input type="text" placeholder="Your Address">
+    <input type="date" placeholder="Appointment Date">
+    <button style="padding:10px;font-size:20px;width:100%;">Submit</button>
+  </div>
+</div>
+
+<!-- SEARCH PAGE -->
+<div class="page" id="search">
+  <h1>Search Products</h1>
+
+  <input type="text" id="searchBox" onkeyup="searchProducts()" placeholder="Search (example: TV, phone, fridge)">
+</div>
+
+<!-- TECHNICAL ISSUES PAGE -->
+<div class="page" id="technical">
+  <h1>Report Technical Issue</h1>
+
+  <div class="form-box">
+    <input type="text" placeholder="Your Name">
+    <input type="text" placeholder="Product (TV, phone, etc)">
+    <input type="text" placeholder="Model Name">
+    <input type="number" placeholder="Price of Product">
+    <input type="date" placeholder="When Did You Buy It?">
+    <input type="tel" placeholder="Your Phone Number">
+    <input type="text" placeholder="Your Address">
+    <button style="padding:10px;font-size:20px;width:100%;">Submit Issue</button>
+  </div>
+</div>
+
+</body>
+</html>
