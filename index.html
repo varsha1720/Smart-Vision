@@ -1,287 +1,456 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-<title>Electronics Store</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Vision - Electronics Store</title>
 
-<style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(90deg, red, black);
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-ser;
-}
+    <style>
+        /* BASIC RESET */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
 
-.navbar {
-  background: black;
-  padding: 15px;
-  text-align: center;
-}
+        }
 
-.navbar a {
-  color: white;
-  margin: 15px;
-  text-decoration: none;
-  font-size: 20px;
-}
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+            background: #2a9b95;
+            background: linear-gradient(90deg, rgba(42, 155, 149, 1) 0%, rgba(87, 199, 133, 1) 50%, rgba(237, 221, 83, 1) 100%);
+        }
 
-.page {
-  display: none;
-  padding: 20px;
-}
 
-.active {
-  display: block;
-}
+        /* CARDS */
+        .cards {
+            padding: 50px 100px;
+        }
 
-.product-box {
-  background: #f8f8;
-  padding: 15px;
-  margin: 15px 0;
-  border-radius: 10px;
-  box-shadow: 0 0 5px gray;
-}
 
-.product-box img {
-  width: 200px;
-  border-radius: 10px;
-}
 
-.form-box {
-  background: #f8f8;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 5px gray;
-  width: 90%;
-  margin: auto;
-}
+        /* NAVBAR */
+        header {
+            background: #333;
+            color: white;
+            padding: 14px 20px;
+        }
 
-input, select {
-  width: 100%;
-  padding: 10px;
-  margin: 8px 0;
-  font-size: 18px;
-}
-</style>
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
 
-<script>
-// PAGE SWITCHING
-function showPage(page) {
-  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-  document.getElementById(page).classList.add("active");
-}
+        nav ul li {
+            margin-right: 20px;
+        }
 
-// SEARCH FUNCTION
-function searchProducts() {
-  let text = document.getElementById("searchBox").value.toLowerCase();
-  let items = document.querySelectorAll(".product-box");
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
 
-  items.forEach(item => {
-    let content = item.innerText.toLowerCase();
-    item.style.display = content.includes(text) ? "block" : "none";
-  });
-}
-</script>
+
+
+        /* SECTIONS */
+        .section {
+            padding: 30px 20px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        h1,
+        h2 {
+            margin-bottom: 15px;
+        }
+
+        /* PRODUCT CATEGORY */
+        .category {
+            margin-bottom: 40px;
+        }
+
+        .product-card {
+            background: white;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            box-shadow: 0px 0px 0px 0px black;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            box-shadow: 1px 10px 5px 5px rgba(0, 0, 0, 0.527);
+            transform: scale(1.1);
+        }
+
+        .product-card img {
+            width: 100%;
+            max-height: 250px;
+            object-fit: cover;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+        .price {
+            color: #d32f2f;
+            font-weight: bold;
+            margin: 10px 0 5px;
+        }
+
+        .colors {
+            color: #555;
+            font-size: 0.9em;
+        }
+
+        /* FORM STYLES */
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        form label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        form input,
+        form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #aaa;
+            border-radius: 4px;
+            margin-top: 5px;
+        }
+
+        form button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background: #555;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 15px;
+            background: #333;
+            color: white;
+            margin-top: 30px;
+        }
+    </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
-<div class="navbar">
-  <a href="#" onclick="showPage('home')">Home</a>
-  <a href="#" onclick="showPage('appointment')">Appointment</a>
-  <a href="#" onclick="showPage('search')">Search</a>
-  <a href="#" onclick="showPage('technical')">Technical Issues</a>
-</div>
+    <!-- NAVBAR -->
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#appointment">Appointment</a></li>
+                <li><a href="#search">Search</a></li>
+                <li><a href="#issues">Technical Issues</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<!-- HOME PAGE -->
-<div class="page active" id="home">
-  <h1>Welcome to This App</h1>
-  <h2>All Products Listed Below</h2>
+    <!-- HOME SECTION -->
+    <section id="home" class="cards">
+        <p
+            style="text-align: center;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;font-size: 4rem;font-weight: bolder;">
+            Welcome to Smart Vision</p>
+        <p
+            style="text-align: center;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;font-size: 3rem;font-weight: bolder;">
+            All Products Listed Below</p>
 
-  <!-- TELEVISIONS -->
-  <h1>Televisions</h1>
+        <!-- CATEGORY TEMPLATE (Televisions Example) -->
+        <div class="category">
+            <p
+            style="text-align: center;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;font-size: 2rem;font-weight: bolder;">Televisions</p>
 
-  <div class="product-box">
-    <h2>Samsung TV</h2>
-    <p><b>Price:</b> ₹35,000</p>
-    <p><b>Colors:</b> Black, Grey</p>
-    <img src="images/Samsung TV.webg" alt="">
-  </div>
+            <div class="product-card" style="display: flex;justify-content: center;align-items: center;">
+                <img src="https://images.samsung.com/is/image/samsung/p6pim/in/ua75du7660kxxl/gallery/in-crystal-uhd-du7000-ua75du7660kxxl-540323340?$Q90_1368_1094_F_JPG$"
+                    alt="Samsung TV" style="width: 250px;">
+                <div
+                    style="display: flex;flex-direction: column;text-align: center;align-content: center;align-self: center;margin-left: 70px;">
+                    <h1>Samsung TV</h1>
+                    <h1 class="price">₹35,000</h1>
+                    <h1 class="colors">Colors: Black, Grey</h1>
+                </div>
+            </div>
 
-  <div class="product-box">
-    <h2>Sony TV</h2>
-    <p><b>Price:</b> ₹42,000</p>
-    <p><b>Colors:</b> Black, Silver</p>
-    <img src="images/Sony TV.webg" alt="">
-  </div>
+            <div class="product-card" style="display: flex;justify-content: center;align-items: center;">
+                <img src="https://images-cdn.ubuy.co.in/66862904758ba51a4e6ee3e0-sony-65-class-bravia-3-led-4k-hdr.jpg"
+                    alt="Sony TV" style="width: 250px;">
+                <div
+                    style="display: flex;flex-direction: column;text-align: center;align-content: center;align-self: center;margin-left: 90px;">
+                    <h1>Sony TV</h1>
+                    <h1 class="price">₹42,000</h1>
+                    <h1 class="colors">Colors: Black, Silver</h1>
+                </div>
+            </div>
 
-  <div class="product-box">
-    <h2>LG TV</h2>
-    <p><b>Price:</b> ₹30,500</p>
-    <p><b>Colors:</b> Black</p>
-    <img src="images/LG TV.webg" alt="">
-  </div>
+            <div class="product-card" style="display: flex;justify-content: center;align-items: center;">
+                <img src="https://dynamicdistributors.in/wp-content/uploads/2023/10/32LQ640BPTA-DZ-1_jpg-1-600x600.jpg"
+                    alt="LG TV" style="width: 250px;">
+                <div
+                    style="display: flex;flex-direction: column;text-align: center;align-content: center;align-self: center;margin-left: 100px;">
+                    <h1>LG TV</h1>
+                    <h1 class="price">₹30,500</h1>
+                    <h1 class="colors">Colors: Black</h1>
+                </div>
+            </div>
+        </div>
 
-  <!-- WATCHES -->
-  <h1>Watches</h1>
+        <!-- WATCHEs CATEGORY -->
+        <div class="category">
+            <p
+            style="text-align: center;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;font-size: 2rem;font-weight: bolder;">Watches</p>
 
-  <div class="product-box">
-    <h2>Boat Watch</h2>
-    <p><b>Price:</b> ₹2,999</p>
-    <p><b>Colors:</b> Blue, Black, Rose Gold</p>
-    <img src="images/Boat Watch.webg" alt="">
-  </div>
+            <div class="product-card" style="display: flex;justify-content: center;align-items: center;">
+                <img src="https://www.bigcmobiles.com/media/catalog/product/cache/e19e56cdd4cf1b4ec073d4305f5db95a/b/o/boat_wave_astra_3_smart_watch.jpg"
+                    alt="Boat Watch" style="width: 250px;">
+                <div
+                    style="display: flex;flex-direction: column;text-align: center;align-content: center;align-self: center;margin-left: 90px;">
+                    <h1>Boat Watch</h1>
+                    <h1 class="price">₹2,999</h1>
+                    <h1 class="colors">Colors: Blue, Black, Rose Gold</h1>
+                </div>
+            </div>
 
-  <div class="product-box">
-    <h2>Fire-Boltt Watch</h2>
-    <p><b>Price:</b> ₹1,799</p>
-    <p><b>Colors:</b> Black, Silver</p>
-    <img src="images/Firebolt Watch.webg" alt="">
-  </div>
+            <div class="product-card" style="display: flex;justify-content: center;align-items: center;">
+                <img src="https://www.fireboltt.com/cdn/shop/files/1_2_1800x1800.png?v=1704875687"
+                    alt="Fire-Boltt Watch" style="width: 250px;">
+                <div
+                    style="display: flex;flex-direction: column;text-align: center;align-content: center;align-self: center;margin-left: 90px;">
+                    <h1>Fire-Boltt Watch</h1>
+                    <h1 class="price">₹1,799</h1>
+                    <h1 class="colors">Black, Silver</h1>
+                </div>
 
-  <div class="product-box">
-    <h2>FastTrack Watch</h2>
-    <p><b>Price:</b> ₹3,500</p>
-    <p><b>Colors:</b> Black, Grey</p>
-    <img src="images/Fastrack Watch.webg" alt="">
-  </div>
+            </div>
 
-  <!-- PHONES -->
-  <h1>Phones</h1>
+            <div class="product-card" style="display: flex;justify-content: center;align-items: center;">
+                <img src="https://www.titan.co.in/dw/image/v2/BKDD_PRD/on/demandware.static/-/Sites-titan-master-catalog/default/dw6b00458e/images/Fastrack/Catalog/38148WM01_1.jpg?sw=600&sh=600"
+                    alt="FastTrack Watch" style="width: 250px;">
+                <div
+                    style="display: flex;flex-direction: column;text-align: center;align-content: center;align-self: center;margin-left: 90px;">
+                    <h1>FastTrack Watch</h1>
+                    <h1 class="price">₹3,500</h1>
+                    <h1 class="colors">Black, Grey</h1>
+                </div>
+            </div>
 
-  <div class="product-box">
-    <h2>Samsung Phone</h2>
-    <p><b>Price:</b> ₹22,000</p>
-    <p><b>Colors:</b> Black, Blue, White</p>
-    <img src="https://via.placeholder.com/200x120?text=Samsung+Phone" alt="">
-  </div>
+        </div>
 
-  <div class="product-box">
-    <h2>Apple iPhone</h2>
-    <p><b>Price:</b> ₹70,000</p>
-    <p><b>Colors:</b> Black, Silver, Pink</p>
-    <img src="https://via.placeholder.com/200x120?text=iPhone" alt="">
-  </div>
+        <!-- Phones -->
+        <div class="category">
+            <p
+            style="text-align: center;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;font-size: 2rem;font-weight: bolder;">Phones</p>
+            <div class="product-card" style="display: flex;justify-content: center;align-items: center;">
+                <img src="https://rukminim2.flixcart.com/image/832/832/xif0q/mobile/w/r/z/-original-imahgfmysgtszenh.jpeg?q=70&crop=false"
+                    alt="Samsung Phone" style="width: 200px;">
+                <div
+                    style="display: flex;flex-direction: column;text-align: center;align-content: center;align-self: center;margin-left: 90px;">
+                    <h1>Samsung Phone</h1>
+                    <h1 class="price">₹22,000</h1>
+                    <h1 class="colors">Black, Blue, White</h1>
+                </div>
+            </div>
 
-  <div class="product-box">
-    <h2>Oppo Phone</h2>
-    <p><b>Price:</b> ₹18,000</p>
-    <p><b>Colors:</b> Blue, Green</p>
-    <img src="https://via.placeholder.com/200x120?text=Oppo+Phone" alt="">
-  </div>
+            <div class="product-card" style="display: flex;justify-content: center;align-items: center;">
+                <img src="https://static.wixstatic.com/media/718f64_a6c8189dd017498699443b1217a0315b~mv2.jpg/v1/fill/w_650,h_525,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/718f64_a6c8189dd017498699443b1217a0315b~mv2.jpg"
+                    alt="iPhone" style="width: 250px;">
+                <div
+                    style="display: flex;flex-direction: column;text-align: center;align-content: center;align-self: center;margin-left: 90px;">
+                    <h1>iPhone</h1>
+                    <h1 class="price">₹70,000</h1>
+                    <h1 class="colors">Black, Silver, Pink</h1>
+                </div>
 
-  <!-- FRIDGES -->
-  <h1>Fridges</h1>
 
-  <div class="product-box">
-    <h2>LG Fridge</h2>
-    <p><b>Price:</b> ₹28,000</p>
-    <p><b>Colors:</b> Silver, Black</p>
-    <img src="https://via.placeholder.com/200x120?text=LG+Fridge" alt="">
-  </div>
+            </div>
 
-  <div class="product-box">
-    <h2>Samsung Fridge</h2>
-    <p><b>Price:</b> ₹30,500</p>
-    <p><b>Colors:</b> Black, Blue</p>
-    <img src="https://via.placeholder.com/200x120?text=Samsung+Fridge" alt="">
-  </div>
+            <div class="product-card" style="display: flex;justify-content: center;align-items: center;">
+                <img src="https://5.imimg.com/data5/SELLER/Default/2024/8/443392577/WH/RO/LC/64225942/oppo-a3-pro-5g-mobile-phone-1000x1000.jpg"
+                    alt="Oppo Phone" style="width: 250px;">
+                <div
+                    style="display: flex;flex-direction: column;text-align: center;align-content: center;align-self: center;margin-left: 90px;">
+                    <h1>Oppo Phone</h1>
+                    <h1 class="price">₹18,000</h1>
+                    <h1 class="colors">Blue, Green</h1>
+                </DIV>
 
-  <div class="product-box">
-    <h2>Haier Fridge</h2>
-    <p><b>Price:</b> ₹24,500</p>
-    <p><b>Colors:</b> Silver</p>
-    <img src="https://via.placeholder.com/200x120?text=Haier+Fridge" alt="">
-  </div>
+            </div>
 
-  <!-- WASHING MACHINES -->
-  <h1>Washing Machines</h1>
+        </div>
 
-  <div class="product-box">
-    <h2>Whirlpool WM</h2>
-    <p><b>Price:</b> ₹19,999</p>
-    <p><b>Colors:</b> Grey, White</p>
-    <img src="https://via.placeholder.com/200x120?text=Whirlpool+WM" alt="">
-  </div>
+        <!-- Fridges -->
+        <div class="category">
+            <p
+            style="text-align: center;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;font-size: 2rem;font-weight: bolder;">Fridges</p>
 
-  <div class="product-box">
-    <h2>LG Washing Machine</h2>
-    <p><b>Price:</b> ₹21,500</p>
-    <p><b>Colors:</b> Silver, Grey</p>
-    <img src="https://via.placeholder.com/200x120?text=LG+WM" alt="">
-  </div>
+            <div class="product-card" style="display: flex;justify-content: center;align-items: center;">
+                <img src="https://electronicparadise.in/cdn/shop/files/1_0fc4df62-3111-4626-bfd0-e58f3dcf1345.jpg?v=1701777795&width=900"
+                    alt="LG Fridge" style="width: 250px;">
+                <div
+                    style="display: flex;flex-direction: column;text-align: center;align-content: center;align-self: center;margin-left: 90px;">
+                    <h1>LG Fridge</h1>
+                    <h1 class="price">₹28,000</h1>
+                    <h1 class="colors">Silver, Black</h1>
+                </div>
+            </div>
 
-  <div class="product-box">
-    <h2>IFB Washing Machine</h2>
-    <p><b>Price:</b> ₹23,000</p>
-    <p><b>Colors:</b> White</p>
-    <img src="https://via.placeholder.com/200x120?text=IFB+WM" alt="">
-  </div>
+            <div class="product-card" style="display: flex;justify-content: center;align-items: center;">
+                <img src="https://img.global.news.samsung.com/global/wp-content/uploads/2017/01/CES2017_FamilyHub2.0_Main_1.jpg"
+                    alt="Samsung Fridge" style="width: 250px;">
+                <div
+                    style="display: flex;flex-direction: column;text-align: center;align-content: center;align-self: center;margin-left: 90px;">
+                    <h1>Samsung Fridge</h1>
+                    <h1 class="price">₹30,500</h1>
+                    <h1 class="colors">Black, Blue</h1>
+                </div>
+            </div>
 
-  <!-- AIR CONDITIONERS -->
-  <h1>Air Conditioners</h1>
+            <div class="product-card" style="display: flex;justify-content: center;align-items: center;">
+                <img src="https://img-prd-pim.poorvika.com/cdn-cgi/image/width=500,height=400,quality=75/product/haier-240-l-frost-free-double-door-2-star-refrigerator-hrf-2902bgb-black-01-front-view.png"
+                    alt="Haier Fridge" style="width: 250px;">
+                <div
+                    style="display: flex;flex-direction: column;text-align: center;align-content: center;align-self: center;margin-left: 90px;">
+                    <h1>Haier Fridge</h1>
+                    <h1 class="price">₹24,500</h1>
+                    <h1 class="colors">Silver</h1>
+                </div>
+            </div>
 
-  <div class="product-box">
-    <h2>Samsung AC</h2>
-    <p><b>Price:</b> ₹33,000</p>
-    <p><b>Colors:</b> White</p>
-    <img src="https://via.placeholder.com/200x120?text=Samsung+AC" alt="">
-  </div>
+        </div>
 
-  <div class="product-box">
-    <h2>LG AC</h2>
-    <p><b>Price:</b> ₹31,500</p>
-    <p><b>Colors:</b> White, Silver</p>
-    <img src="https://via.placeholder.com/200x120?text=LG+AC" alt="">
-  </div>
+        <!-- Washing Machines -->
+        <div class="category">
+            <p
+            style="text-align: center;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;font-size: 2rem;font-weight: bolder;">Washing Machines</p>
 
-  <div class="product-box">
-    <h2>Panasonic AC</h2>
-    <p><b>Price:</b> ₹29,000</p>
-    <p><b>Colors:</b> White</p>
-    <img src="https://via.placeholder.com/200x120?text=Panasonic+AC" alt="">
-  </div>
+            <div class="product-card" style="display: flex;justify-content: center;align-items: center;">
+                <img src="https://whirlpoolindia.vtexassets.com/arquivos/ids/170230-1200-auto?v=638783889463770000&width=1200&height=auto&aspect=true"
+                    alt="Whirlpool" style="width: 250px;">
+                <div
+                    style="display: flex;flex-direction: column;text-align: center;align-content: center;align-self: center;margin-left: 90px;">
+                    <h1>Whirlpool</h1>
+                    <h1 class="price">₹19,999</h1>
+                    <h1 class="colors">Grey, White</h1>
+                </div>
 
-</div>
+            </div>
 
-<!-- APPOINTMENT PAGE -->
-<div class="page" id="appointment">
-  <h1>Appointment Form</h1>
+            <div class="product-card" style="display: flex;justify-content: center;align-items: center;">
+                <img src="https://img-prd-pim.poorvika.com/cdn-cgi/image/width=500,height=400,quality=75/product/LG-11-0kg-7-0kg-fully-automatic-front-load-washer-dryer-combo-ai-direct-drive-fhd1107stb-black-steel-Front-View.png"
+                    alt="LG WM" style="width: 250px;">
+                <div
+                    style="display: flex;flex-direction: column;text-align: center;align-content: center;align-self: center;margin-left: 90px;">
+                    <h1>LG Washing Machine</h1>
+                    <h1 class="price">₹21,500</h1>
+                    <h1 class="colors">Silver, Grey</h1>
+                </div>
+            </div>
 
-  <div class="form-box">
-    <input type="text" placeholder="Your Name">
-    <input type="date" placeholder="Date of Birth">
-    <input type="tel" placeholder="Phone Number">
-    <input type="tel" placeholder="Secondary Phone Number">
-    <input type="email" placeholder="Email ID">
-    <input type="text" placeholder="Your Address">
-    <input type="date" placeholder="Appointment Date">
-    <button style="padding:10px;font-size:20px;width:100%;">Submit</button>
-  </div>
-</div>
+            <div class="product-card" style="display: flex;justify-content: center;align-items: center;">
+                <img src="https://media-ik.croma.com/prod/https://media.tatacroma.com/Croma%20Assets/Large%20Appliances/Washers%20and%20Dryers/Images/308875_0_fJiW7yNb8.png?updatedAt=1758551483553?tr=w-640"
+                    alt="IFB WM" style="width: 250px;">
+                <div
+                    style="display: flex;flex-direction: column;text-align: center;align-content: center;align-self: center;margin-left: 90px;">
+                    <h1>IFB Washing Machine</h1>
+                    <h1 class="price">₹23,000</h1>
+                    <h1 class="colors">White</h1>
+                </div>
 
-<!-- SEARCH PAGE -->
-<div class="page" id="search">
-  <h1>Search Products</h1>
 
-  <input type="text" id="searchBox" onkeyup="searchProducts()" placeholder="Search (example: TV, phone, fridge)">
-</div>
+            </div>
+        </div>
 
-<!-- TECHNICAL ISSUES PAGE -->
-<div class="page" id="technical">
-  <h1>Report Technical Issue</h1>
+    </section>
 
-  <div class="form-box">
-    <input type="text" placeholder="Your Name">
-    <input type="text" placeholder="Product (TV, phone, etc)">
-    <input type="text" placeholder="Model Name">
-    <input type="number" placeholder="Price of Product">
-    <input type="date" placeholder="When Did You Buy It?">
-    <input type="tel" placeholder="Your Phone Number">
-    <input type="text" placeholder="Your Address">
-    <button style="padding:10px;font-size:20px;width:100%;">Submit Issue</button>
-  </div>
-</div>
+    <!-- APPOINTMENT FORM -->
+    <section id="appointment" class="section">
+
+        <h2 style="text-align: center;">Book Appointment</h2>
+
+        <form>
+
+            <label>Name:</label>
+            <input type="text" style="width: 100%;">
+
+            <label>Email:</label>
+            <input type="email" style="width: 100%;">
+
+            <label>Phone:</label>
+            <input type="text" style="width: 100%;">
+
+            <label>Date:</label>
+            <input type="date" style="width: 100%;">
+
+            <label>Time:</label>
+            <input type="time" style="width: 100%;">
+
+            <button style="margin-top: 15px;">Submit</button>
+        </form>
+    </section>
+
+
+    <!-- SEARCH -->
+    <section id="search" class="section">
+        <h2>Search Products</h2>
+        <form>
+            <label>Enter product name:</label>
+            <input type="text">
+            <button>Search</button>
+        </form>
+    </section>
+
+    <!-- ISSUES -->
+    <section id="issues" class="section">
+        <h2>Report Technical Issue</h2>
+
+        <form>
+            <label>Name:</label>
+            <input type="text">
+
+            <label>Email:</label>
+            <input type="email">
+
+            <label>Issue Description:</label>
+            <textarea rows="4"></textarea>
+
+            <button>Submit Issue</button>
+        </form>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2025 Smart Vision - All Rights Reserved</p>
+    </footer>
 
 </body>
+
 </html>
